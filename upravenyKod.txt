@@ -1,0 +1,49 @@
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.io.*;
+import java.util.Scanner;
+
+public class Gui extends JFrame{
+    private JPanel panel;
+    private JTextArea txt;
+    private File selectedFile;
+
+    public Gui() {
+        components();
+        menu();
+    }
+    public void components() {
+        setContentPane(panel);
+        setTitle("nevim");
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setBounds(700, 300, 500, 500);
+    }
+
+    public void menu() {
+
+        JMenuBar jMenuBar = new JMenuBar();
+        setJMenuBar(jMenuBar);
+
+        JMenu jMenu = new JMenu("Options");
+        jMenuBar.add(jMenu);
+
+        JMenuItem fileItem = new JMenuItem("File");
+        jMenu.add(fileItem);
+        fileItem.addActionListener(e -> chooseFile());
+
+        JMenuItem saveItem = new JMenuItem("Save");
+        jMenu.add(saveItem);
+        saveItem.addActionListener(e -> save(selectedFile));
+
+        JMenuItem saveAsItem = new JMenuItem("Save As");
+        jMenu.add(saveAsItem);
+        saveAsItem.addActionListener(e -> saveAs());
+    }
+
+    public void chooseFile(){
+        JFileChooser fc = new JFileChooser(".");
+        fc.setFileFilter(new FileNameExtensionFilter("Project files", "txt"));
+        int result = fc.showOpenDialog(this);
+
+
+         upraveno
